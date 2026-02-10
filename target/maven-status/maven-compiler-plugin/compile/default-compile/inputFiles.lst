@@ -1,5 +1,11 @@
-C:\Users\anike\OneDrive\Desktop\Aniket\Ecommerce\inventory-service\src\main\java\com\ecommerce\inventory\controller\InventoryController.java
-C:\Users\anike\OneDrive\Desktop\Aniket\Ecommerce\inventory-service\src\main\java\com\ecommerce\inventory\entity\Inventory.java
-C:\Users\anike\OneDrive\Desktop\Aniket\Ecommerce\inventory-service\src\main\java\com\ecommerce\inventory\InventoryServiceApplication.java
-C:\Users\anike\OneDrive\Desktop\Aniket\Ecommerce\inventory-service\src\main\java\com\ecommerce\inventory\repository\InventoryRepository.java
-C:\Users\anike\OneDrive\Desktop\Aniket\Ecommerce\inventory-service\src\main\java\com\ecommerce\inventory\service\InventoryService.java
+C:\Users\anike\OneDrive\Desktop\Aniket\Ecommerce\Backend\inventory-service\src\main\java\com\ecommerce\inventory\controller\InventoryController.java
+C:\Users\anike\OneDrive\Desktop\Aniket\Ecommerce\Backend\inventory-service\src\main\java\com\ecommerce\inventory\dto\ApiResponse.java
+C:\Users\anike\OneDrive\Desktop\Aniket\Ecommerce\Backend\inventory-service\src\main\java\com\ecommerce\inventory\dto\ErrorResponse.java
+C:\Users\anike\OneDrive\Desktop\Aniket\Ecommerce\Backend\inventory-service\src\main\java\com\ecommerce\inventory\dto\InventoryResponse.java
+C:\Users\anike\OneDrive\Desktop\Aniket\Ecommerce\Backend\inventory-service\src\main\java\com\ecommerce\inventory\dto\StockRequest.java
+C:\Users\anike\OneDrive\Desktop\Aniket\Ecommerce\Backend\inventory-service\src\main\java\com\ecommerce\inventory\entity\Inventory.java
+C:\Users\anike\OneDrive\Desktop\Aniket\Ecommerce\Backend\inventory-service\src\main\java\com\ecommerce\inventory\exception\GlobalExceptionHandler.java
+C:\Users\anike\OneDrive\Desktop\Aniket\Ecommerce\Backend\inventory-service\src\main\java\com\ecommerce\inventory\exception\ResourceNotFoundException.java
+C:\Users\anike\OneDrive\Desktop\Aniket\Ecommerce\Backend\inventory-service\src\main\java\com\ecommerce\inventory\InventoryServiceApplication.java
+C:\Users\anike\OneDrive\Desktop\Aniket\Ecommerce\Backend\inventory-service\src\main\java\com\ecommerce\inventory\repository\InventoryRepository.java
+C:\Users\anike\OneDrive\Desktop\Aniket\Ecommerce\Backend\inventory-service\src\main\java\com\ecommerce\inventory\service\InventoryService.java
