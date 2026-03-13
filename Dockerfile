@@ -1,56 +1,27 @@
 # Stage 1: Build stage
 FROM maven:3.9.6-eclipse-temurin-21 AS builder
-
-# Set working directory
 WORKDIR /app
 
-# Copy parent pom.xml first
-COPY pom.xml ./
+# Install parent pom to local Maven repo (non-recursive)
+COPY pom.xml ./parent-pom.xml
+RUN mvn install -N -f parent-pom.xml -DskipTests
 
-# Copy inventory-service pom.xml
-COPY inventory-service/pom.xml ./inventory-service/
+# Build service as standalone module
+WORKDIR /app/inventory
+COPY inventory/pom.xml ./
+RUN mvn dependency:go-offline -DskipTests
 
-# Download dependencies (layer caching optimization)
-RUN mvn dependency:go-offline -pl inventory-service -am
-
-# Copy source code
-COPY inventory-service/src ./inventory-service/src
-
-# Build the application (skip tests for faster builds)
-RUN mvn clean package -pl inventory-service -am -DskipTests
+COPY inventory/src ./src
+RUN mvn clean package -DskipTests
 
 # Stage 2: Runtime stage
 FROM eclipse-temurin:21-jre-alpine
-
-# Add metadata
-LABEL maintainer="ecommerce-team"
-LABEL service="inventory-service"
-
-# Create non-root user for security
 RUN addgroup -S spring && adduser -S spring -G spring
-
-# Set working directory
 WORKDIR /app
-
-# Copy the JAR from builder stage
-COPY --from=builder /app/inventory-service/target/*.jar app.jar
-
-# Change ownership to non-root user
+COPY --from=builder /app/inventory/target/*.jar app.jar
 RUN chown spring:spring app.jar
-
-# Switch to non-root user
 USER spring
-
-# Environment variables for Spring profiles and JVM optimization
-ENV SPRING_PROFILES_ACTIVE=dev \
-    JAVA_OPTS="-Xms512m -Xmx1024m -XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0"
-
-# Expose the service port
+ENV JAVA_OPTS="-Xms256m -Xmx512m -XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0"
 EXPOSE 8083
-
-# Health check using Spring Boot Actuator
-HEALTHCHECK --interval=30s --timeout=3s --start-period=40s --retries=3 \
-    CMD wget --quiet --tries=1 --spider http://localhost:8083/actuator/health || exit 1
-
-# Run the application
+HEALTHCHECK --interval=30s --timeout=3s --start-period=60s --retries=3     CMD nc -z localhost 8083 || exit 1
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /app/app.jar"]
